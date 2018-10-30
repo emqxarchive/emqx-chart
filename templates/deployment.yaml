@@ -1,5 +1,4 @@
 apiVersion: apps/v1beta2
-#apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: {{ include "emqx.fullname" . }}
@@ -48,12 +47,12 @@ spec:
             value: emqx 
           - name: EMQX_CLUSTER__DISCOVERY
             value: k8s 
+          - name: EMQX_CLUSTER__K8S__SERVICE_NAME
+            value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__APISERVER
             value: {{ .Values.env.kubeApiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
             value: {{ .Values.env.kubeNamespace }}
-          - name: EMQX_CLUSTER__K8S__SERVICE_NAME
-            value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: {{ .Values.env.kubeAddressType }}
           - name: EMQX_CLUSTER__K8S__APP_NAME
