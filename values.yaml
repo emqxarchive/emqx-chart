@@ -1,0 +1,39 @@
+# Default values for emqx.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2 
+
+image:
+  repository: emqx/emqx
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env:
+  k8sApiserver: http://127.0.0.1:8080
+  k8sNamespace: default
+  k8sAddressType: ip
+  k8sAppName: emqx 
+
+service:
+  type: ClusterIP
+  mqttPort: 1883
+  mqttsslPort: 8883
+  mgmtPort: 8080
+  dashboardPort: 18083
+  mappingPort: 4369 
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+
