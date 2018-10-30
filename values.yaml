@@ -5,15 +5,13 @@
 replicaCount: 2 
 
 image:
-  repository: emqx/emqx
   tag: latest
   pullPolicy: IfNotPresent
 
 env:
-  k8sApiserver: http://127.0.0.1:8080
-  k8sNamespace: default
-  k8sAddressType: ip
-  k8sAppName: emqx 
+  kubeApiserver: http://127.0.0.1:8080
+  kubeNamespace: default
+  kubeAddressType: ip
 
 service:
   type: ClusterIP

@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "emqx/emqx:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: 1883
@@ -44,16 +44,18 @@ spec:
           env:
           - name: EMQX_NAME
             value: emqx 
+          - name: EMQX_CLUSTER__K8S__APP_NAME
+            value: emqx 
           - name: EMQX_CLUSTER__DISCOVERY
             value: k8s 
           - name: EMQX_CLUSTER__K8S__APISERVER
-            value: {{ .Values.env.k8sApiserver }} 
+            value: {{ .Values.env.kubeApiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
-            value: {{ .Values.env.k8sNamespace }}
+            value: {{ .Values.env.kubeNamespace }}
           - name: EMQX_CLUSTER__K8S__SERVICE_NAME
             value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
-            value: {{ .Values.env.k8sAddressType }}
+            value: {{ .Values.env.kubeAddressType }}
           - name: EMQX_CLUSTER__K8S__APP_NAME
-            value: {{ .Values.env.k8sAppName }}
+            value: emqx 
           tty: true
