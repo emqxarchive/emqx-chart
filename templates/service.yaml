@@ -22,6 +22,14 @@ spec:
     port: {{ .Values.service.mgmtPort }}
     protocol: TCP
     targetPort: 8080
+  - name: websocket
+    port: {{ .Values.service.websocketPort }}
+    protocol: TCP
+    targetPort: 8083
+  - name: wss
+    port: {{ .Values.service.wssPort }}
+    protocol: TCP
+    targetPort: 8084
   - name: dashboard
     port: {{ .Values.service.dashboardPort }}
     protocol: TCP

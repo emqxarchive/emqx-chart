@@ -27,19 +27,9 @@ spec:
           - containerPort: 1883
           - containerPort: 8883
           - containerPort: 8080
+          - containerPort: 8083
+          - containerPort: 8084
           - containerPort: 18083
-          - containerPort: 4369
-          - containerPort: 4370
-          - containerPort: 6369
-          - containerPort: 6370
-          - containerPort: 6371
-          - containerPort: 6372
-          - containerPort: 6373
-          - containerPort: 6374
-          - containerPort: 6375
-          - containerPort: 6376
-          - containerPort: 6377
-          - containerPort: 6378
           env:
           - name: EMQX_NAME
             value: emqx 

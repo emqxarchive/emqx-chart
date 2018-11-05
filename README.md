@@ -29,8 +29,9 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `env.kubeApiserver`  | **Required!** Kubernates API server address |
 | `env.kubeNamespace`  | kubernetes namespace， Default:default |
 | `env.kubeAddressType`  | The address type is used to extract host from k8s service, Value: ip && dns,  Default:ip  |
-| `service.mqttPort`  | Emqx cluster mqtt port, Default:1883  |
-| `service.mqttsslPort` | Emqx cluster mqttssl port, Delfault:8883  |
-| `service.mgmtPort`  | Emqx cluster mgmt port, Default:8080  |
+| `service.mqttPort`  | Emqx cluster MQTT port, Default:1883  |
+| `service.mqttsslPort` | Emqx cluster MQTT(SSL) port, Delfault:8883  |
+| `service.mgmtPort`  | Emqx cluster mgmt API, Default:8080  |
+| `service.websocketPort`  | Emqx cluster WebSocket/http port, Default:8083  |
+| `service.wssPort`  | Emqx cluster WSS/HTTPS port, Default:8084  |
 | `service.dashboardPort` | Emqx cluster dashboard port, Default: 18083 |
-| `service.mappingPort` | Emqx cluster mapping port, Default: 4369|

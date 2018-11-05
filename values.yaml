@@ -18,8 +18,9 @@ service:
   mqttPort: 1883
   mqttsslPort: 8883
   mgmtPort: 8080
+  websocketPort: 8083
+  wssPort: 8084
   dashboardPort: 18083
-  mappingPort: 4369 
 
 ingress:
   enabled: false
