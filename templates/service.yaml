@@ -34,10 +34,6 @@ spec:
     port: {{ .Values.service.dashboardPort }}
     protocol: TCP
     targetPort: 18083
-  - name: mapping
-    port: {{ .Values.service.mappingPort }}
-    protocol: TCP
-    targetPort: 4369
   selector:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
