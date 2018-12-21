@@ -9,7 +9,7 @@ To install the chart with the release name `my-emqx`:
 ```
 $ git clone https://github.com/emqx/emqx-helm.git
 $ cd emqx-helm
-$ helm install --name my-emqx --set k8sApiserver=http://xx.xx.xx.xx:port .
+$ helm install --name my-emqx --set env.kubeApiserver=http://xx.xx.xx.xx:port .
 ```
 
 # Uninstalling the Chart
@@ -26,6 +26,7 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `replicaCount` |  Default:2 |
 | `image.tag` | Default:latest  |
 | `image.pullPolicy`  | Default:IfNotPresent  |
+| `secret.apiserverToken` | Token used for authentication by kube apiserver |
 | `env.kubeApiserver`  | **Required!** Kubernates API server address |
 | `env.kubeNamespace`  | kubernetes namespace， Default:default |
 | `env.kubeAddressType`  | The address type is used to extract host from k8s service, Value: ip && dns,  Default:ip  |
