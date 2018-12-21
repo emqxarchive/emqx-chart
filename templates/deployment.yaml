@@ -48,3 +48,9 @@ spec:
           - name: EMQX_CLUSTER__K8S__APP_NAME
             value: emqx 
           tty: true
+          {{ if .Values.secret.apiserverToken  }}
+          volumeMounts:
+          - name: apiserver-token
+            mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+            readOnly: true
+          {{ end }}

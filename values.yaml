@@ -4,6 +4,9 @@
 
 replicaCount: 2 
 
+secret:
+  apiserverToken: 
+
 image:
   tag: latest
   pullPolicy: IfNotPresent
