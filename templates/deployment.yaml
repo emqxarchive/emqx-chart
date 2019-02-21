@@ -19,6 +19,12 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      {{ if .Values.secret.apiserverToken  }}
+      volumes:
+      - name: apiserver-token
+        secret:
+           secretName: apiserver-tokent
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "emqx/emqx:{{ .Values.image.tag }}"
