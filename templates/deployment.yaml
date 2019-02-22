@@ -23,7 +23,7 @@ spec:
       volumes:
       - name: apiserver-token
         secret:
-           secretName: apiserver-tokent
+           secretName: apiserver-token
       {{ end }}
       containers:
         - name: {{ .Chart.Name }}
