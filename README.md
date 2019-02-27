@@ -23,13 +23,13 @@ The following table lists the configurable parameters of the emqx chart and thei
 
 | Parameter  | Description |
 | ---        |  ---        |
-| `replicaCount` |  Default:2 |
-| `image.tag` | Default:latest  |
-| `image.pullPolicy`  | Default:IfNotPresent  |
+| `namespace`  | kubernetes namespace， Default:default |
 | `secret.apiserverToken` | Token used for authentication by kube apiserver |
-| `env.kubeApiserver`  | **Required!** Kubernates API server address |
-| `env.kubeNamespace`  | kubernetes namespace， Default:default |
-| `env.kubeAddressType`  | The address type is used to extract host from k8s service, Value: ip && dns,  Default:ip  |
+| `deployment.replicaCount` |  Default:2 |
+| `deployment.image` | Default:latest  |
+| `deployment.imagePullPolicy`  | Default:IfNotPresent  |
+| `deployment.env.kubeApiserver`  | **Required!** Kubernates API server address |
+| `deployment.env.kubeAddressType`  | The address type is used to extract host from k8s service, Value: ip && dns,  Default:ip  |
 | `service.mqttPort`  | Emqx cluster MQTT port, Default:1883  |
 | `service.mqttsslPort` | Emqx cluster MQTT(SSL) port, Delfault:8883  |
 | `service.mgmtPort`  | Emqx cluster mgmt API, Default:8080  |

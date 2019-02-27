@@ -2,13 +2,14 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ include "emqx.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     helm.sh/chart: {{ include "emqx.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "emqx.name" . }}
@@ -26,9 +27,9 @@ spec:
            secretName: apiserver-token
       {{ end }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: "emqx/emqx:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: emqx
+          image: {{ .Values.deployment.image}}
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
           ports:
           - containerPort: 1883
           - containerPort: 8883
@@ -46,11 +47,11 @@ spec:
           - name: EMQX_CLUSTER__K8S__SERVICE_NAME
             value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__APISERVER
-            value: {{ .Values.env.kubeApiserver }} 
+            value: {{ .Values.deployment.env.kubeApiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
-            value: {{ .Values.env.kubeNamespace }}
+            value: {{ .Values.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
-            value: {{ .Values.env.kubeAddressType }}
+            value: {{ .Values.deployment.env.kubeAddressType }}
           - name: EMQX_CLUSTER__K8S__APP_NAME
             value: emqx 
           tty: true
@@ -60,3 +61,7 @@ spec:
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
             readOnly: true
           {{ end }}
+        {{ if .Values.deployment.nodeExporter }}
+        - name: prometheus-node-exporter
+          image: "quay.io/prometheus/node-exporter:latest"
+        {{ end }}
