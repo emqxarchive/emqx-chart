@@ -2,7 +2,7 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ include "emqx.fullname" . }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
   labels:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     helm.sh/chart: {{ include "emqx.chart" . }}
@@ -20,11 +20,11 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      {{ if .Values.secret.apiserverToken  }}
+      {{ if .Values.global.apiserverToken  }}
       volumes:
-      - name: apiserver-token
+      - name: {{ include "emqx-control-center.fullname" . }}
         secret:
-           secretName: apiserver-token
+           secretName: {{ include "emqx-control-center.fullname" . }}
       {{ end }}
       containers:
         - name: emqx
@@ -47,17 +47,21 @@ spec:
           - name: EMQX_CLUSTER__K8S__SERVICE_NAME
             value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__APISERVER
-            value: {{ .Values.deployment.env.kubeApiserver }} 
+            value: {{ .Values.global.apiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
-            value: {{ .Values.namespace }}
+            value: {{ .Values.global.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: {{ .Values.deployment.env.kubeAddressType }}
           - name: EMQX_CLUSTER__K8S__APP_NAME
             value: emqx 
+          - name: EMQX_LOADED_PLUGINS
+            value: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_statsd"
+          - name: EMQX_STATSD__PUSH__GATEWAY__SERVER
+            value: "http://{{ .Values.global.hostIP }}:9091"
           tty: true
-          {{ if .Values.secret.apiserverToken  }}
+          {{ if .Values.global.apiserverToken  }}
           volumeMounts:
-          - name: apiserver-token
+          - name: {{ include "emqx-control-center.fullname" . }}
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
             readOnly: true
           {{ end }}

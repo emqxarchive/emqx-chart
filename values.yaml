@@ -2,19 +2,21 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  hostIP: 139.198.123.97 
+  namespace: default
+  apiserver: https://139.198.123.97/k8s/clusters/c-rtnp9
+  apiserverToken: token-7wl98:qzmjhr9jp72nng28h2fbmpv22k82d7c47dz5cdqmdks2dggl2rgb2m 
+  
 namespace: default
-
-secret:
-  apiserverToken: 
 
 deployment:
   replicaCount: 2 
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
   env:
-    kubeApiserver: http://127.0.0.1:8080 
     kubeAddressType: ip
-  nodeExporter: false 
+  nodeExporter: true 
 
 service:
   type: ClusterIP
@@ -37,5 +39,3 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-

@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ include "emqx-control-center.fullname" . }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "emqx-control-center.name" . }}
+    helm.sh/chart: {{ include "emqx-control-center.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "emqx-control-center.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "emqx-control-center.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      {{ if .Values.global.apiserverToken  }}
+      volumes:
+      - name: {{ include "emqx-control-center.fullname" . }}
+        secret:
+           secretName: {{ include "emqx-control-center.fullname" . }}
+      {{ end }}
+      containers:
+        - name: emqx-control-center
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 8888
+          - containerPort: 3000
+          - containerPort: 9090
+          - containerPort: 9091
+          env:
+          - name: POSTGRES_PASSWORD
+            value: {{ .Values.deployment.env.postgresPassword }} 
+          {{ if .Values.global.apiserverToken  }}
+          volumeMounts:
+          - name: {{ include "emqx-control-center.fullname" . }}
+            mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+            readOnly: true
+          {{ end }}
