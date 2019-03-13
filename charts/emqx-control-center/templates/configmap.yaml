@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "emqx-control-center.fullname" . }}-configmap
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "emqx-control-center.name" . }}
+    helm.sh/chart: {{ include "emqx-control-center.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  config.py: |
+    import os
+
+    # backend path
+    BACKEND_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+
+    # database uri
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://root:emqpublic@postgres/ecc'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://root:{{ .Values.postgresPassword }}@127.0.0.1/ecc'
+
+    # prometheus hosts
+    # PROMETHEUS_HOSTS = 'http://prometheus:9090'
+    PROMETHEUS_HOSTS = 'http://127.0.0.1:9090'
+
+    # alertmanager hosts
+    # ALERTMANAGER_HOSTS = 'http://alertmanager:9093'
+    ALERTMANAGER_HOSTS = 'http://127.0.0.1:9093'
+
+    # prometheus alert rules path
+    # PROMETHEUS_ALERT_RULES = os.path.abspath(os.path.join(os.path.join(BACKEND_PATH, os.pardir),
+    #                                                      'deploy/docker/prometheus/rules'))
+    PROMETHEUS_ALERT_RULES = '/etc/prometheus/rules'
+
+    # prometheus alertmanager config path
+    # ALERTMANAGER_CONFIG = os.path.abspath(os.path.join(os.path.join(BACKEND_PATH, os.pardir),
+    #                                                    'deploy/docker/alertmanager/alertmanager.yml'))
+    ALERTMANAGER_CONFIG = '/etc/alertmanager/alertmanager.yml'
+
+    # app token and app id
+    APP_TOKEN = ""
+    APP_ID = ""

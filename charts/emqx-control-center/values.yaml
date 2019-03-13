@@ -2,7 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-namespace: default
+postgresPassword: emqpublic
+hostname: 
 
 service:
   eccPort: 8888
@@ -12,5 +13,3 @@ service:
 
 deployment:
   image: ecc:test
-  env:
-    postgresPassword: emqpublic

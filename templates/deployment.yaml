@@ -22,9 +22,9 @@ spec:
     spec:
       {{ if .Values.global.apiserverToken  }}
       volumes:
-      - name: {{ include "emqx-control-center.fullname" . }}
+      - name: {{ include "emqx.fullname" . }}
         secret:
-           secretName: {{ include "emqx-control-center.fullname" . }}
+           secretName: {{ include "emqx.fullname" . }}
       {{ end }}
       containers:
         - name: emqx
@@ -54,14 +54,10 @@ spec:
             value: {{ .Values.deployment.env.kubeAddressType }}
           - name: EMQX_CLUSTER__K8S__APP_NAME
             value: emqx 
-          - name: EMQX_LOADED_PLUGINS
-            value: "emqx_management,emqx_recon,emqx_retainer,emqx_dashboard,emqx_statsd"
-          - name: EMQX_STATSD__PUSH__GATEWAY__SERVER
-            value: "http://{{ .Values.global.hostIP }}:9091"
           tty: true
           {{ if .Values.global.apiserverToken  }}
           volumeMounts:
-          - name: {{ include "emqx-control-center.fullname" . }}
+          - name: {{ include "emqx.fullname" . }}
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
             readOnly: true
           {{ end }}

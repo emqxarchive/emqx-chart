@@ -22,25 +22,42 @@ spec:
     spec:
       {{ if .Values.global.apiserverToken  }}
       volumes:
-      - name: {{ include "emqx-control-center.fullname" . }}
+      - name: {{ include "emqx-control-center.fullname" . }}-apitoken
         secret:
-           secretName: {{ include "emqx-control-center.fullname" . }}
+           secretName: {{ include "emqx-control-center.fullname" . }}-apitoken
+      - name: {{ include "emqx-control-center.fullname" . }}-configmap
+        configMap:
+          name:  {{ include "emqx-control-center.fullname" . }}-configmap
+      {{ end }}
+      {{ if .Values.hostname }}
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.hostname }}
       {{ end }}
       containers:
         - name: emqx-control-center
           image: {{ .Values.deployment.image }}
           imagePullPolicy: Never
+          command: ["--k8s"]
           ports:
           - containerPort: 8888
           - containerPort: 3000
-          - containerPort: 9090
-          - containerPort: 9091
           env:
+          - name: EMQX_CLUSTER_K8S_SERVICE_NAME
+            value: {{ .Release.Name }}-emqx-helm 
+          - name: EMQX_CLUSTER_K8S_NAMESPACE
+            value: {{ .Values.global.namespace }}
+          - name: EMQX_CLUSTER_K8S_APISERVER
+            value: {{ .Values.global.apiserver }}
           - name: POSTGRES_PASSWORD
-            value: {{ .Values.deployment.env.postgresPassword }} 
-          {{ if .Values.global.apiserverToken  }}
+            value: {{ .Values.postgresPassword }} 
           volumeMounts:
-          - name: {{ include "emqx-control-center.fullname" . }}
+          - name: {{ include "emqx-control-center.fullname" . }}-configmap
+            mountPath: "/opt/emqx-control-center/backend/instance"
+            readOnly: true
+          {{ if .Values.global.apiserverToken  }}
+          - name: {{ include "emqx-control-center.fullname" . }}-apitoken
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
             readOnly: true
           {{ end }}
+          
+          

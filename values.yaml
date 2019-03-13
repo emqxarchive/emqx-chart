@@ -3,13 +3,10 @@
 # Declare variables to be passed into your templates.
 
 global:
-  hostIP: 139.198.123.97 
   namespace: default
-  apiserver: https://139.198.123.97/k8s/clusters/c-rtnp9
-  apiserverToken: token-7wl98:qzmjhr9jp72nng28h2fbmpv22k82d7c47dz5cdqmdks2dggl2rgb2m 
+  apiserver: 
+  apiserverToken: 
   
-namespace: default
-
 deployment:
   replicaCount: 2 
   image: emqx/emqx:latest
@@ -26,6 +23,10 @@ service:
   websocketPort: 8083
   wssPort: 8084
   dashboardPort: 18083
+
+emqx-control-center:
+  postgresPassword: emqpublic
+  hostname: 
 
 ingress:
   enabled: false
