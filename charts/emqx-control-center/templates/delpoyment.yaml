@@ -20,14 +20,14 @@ spec:
         app.kubernetes.io/name: {{ include "emqx-control-center.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      {{ if .Values.global.apiserverToken  }}
       volumes:
-      - name: {{ include "emqx-control-center.fullname" . }}-apitoken
-        secret:
-           secretName: {{ include "emqx-control-center.fullname" . }}-apitoken
       - name: {{ include "emqx-control-center.fullname" . }}-configmap
         configMap:
           name:  {{ include "emqx-control-center.fullname" . }}-configmap
+      {{ if .Values.global.apiserverToken  }}
+      - name: {{ include "emqx-control-center.fullname" . }}-apitoken
+        secret:
+           secretName: {{ include "emqx-control-center.fullname" . }}-apitoken
       {{ end }}
       {{ if .Values.hostname }}
       nodeSelector:
@@ -37,7 +37,7 @@ spec:
         - name: emqx-control-center
           image: {{ .Values.deployment.image }}
           imagePullPolicy: Never
-          command: ["--k8s"]
+          args: ["--k8s"]
           ports:
           - containerPort: 8888
           - containerPort: 3000

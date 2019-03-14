@@ -12,4 +12,4 @@ service:
   prometheusGatewayPort: 9091
 
 deployment:
-  image: ecc:test
+  image: ecc:latest
