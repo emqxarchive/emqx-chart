@@ -3,18 +3,17 @@
 # Declare variables to be passed into your templates.
 
 namespace: default
-
-secret:
-  apiserverToken: 
+apiserver:  http://127.0.0.1:8080  
+apiserverToken: 
 
 deployment:
   replicaCount: 2 
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
-  env:
-    kubeApiserver: http://127.0.0.1:8080 
-    kubeAddressType: ip
   nodeExporter: false 
+
+emqxConfig:
+  EMQX_LOADED_PLUGINS: "emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"
 
 service:
   type: ClusterIP

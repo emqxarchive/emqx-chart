@@ -9,7 +9,7 @@ To install the chart with the release name `my-emqx`:
 ```
 $ git clone https://github.com/emqx/emqx-helm.git
 $ cd emqx-helm
-$ helm install --name my-emqx --set env.kubeApiserver=http://xx.xx.xx.xx:port .
+$ helm install --name my-emqx --set env.apiserver=http://xx.xx.xx.xx:port .
 ```
 
 # Uninstalling the Chart
@@ -23,16 +23,17 @@ The following table lists the configurable parameters of the emqx chart and thei
 
 | Parameter  | Description |
 | ---        |  ---        |
+| `apiserver`  | **Required!** Kubernates API server address |
+| `apiserverToken` | Token used for authentication by kube apiserver |
 | `namespace`  | kubernetes namespace， Default:default |
-| `secret.apiserverToken` | Token used for authentication by kube apiserver |
 | `deployment.replicaCount` |  Default:2 |
-| `deployment.image` | Default:latest  |
+| `deployment.image` | Default:emqx/emqx:latest  |
 | `deployment.imagePullPolicy`  | Default:IfNotPresent  |
-| `deployment.env.kubeApiserver`  | **Required!** Kubernates API server address |
-| `deployment.env.kubeAddressType`  | The address type is used to extract host from k8s service, Value: ip && dns,  Default:ip  |
+| `deployment.nodeExporter` | True or false, Default: false |
 | `service.mqttPort`  | Emqx cluster MQTT port, Default:1883  |
 | `service.mqttsslPort` | Emqx cluster MQTT(SSL) port, Delfault:8883  |
 | `service.mgmtPort`  | Emqx cluster mgmt API, Default:8080  |
 | `service.websocketPort`  | Emqx cluster WebSocket/http port, Default:8083  |
 | `service.wssPort`  | Emqx cluster WSS/HTTPS port, Default:8084  |
 | `service.dashboardPort` | Emqx cluster dashboard port, Default: 18083 |
+| `emqxConfig` | Emqx configuration item, see the [documentation](https://github.com/emqx/emqx-docker#emq-x-configuration) |

@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
-      {{ if .Values.secret.apiserverToken  }}
+      {{ if .Values.apiserverToken  }}
       volumes:
       - name: apiserver-token
         secret:
@@ -37,6 +37,9 @@ spec:
           - containerPort: 8083
           - containerPort: 8084
           - containerPort: 18083
+          envFrom:
+            - configMapRef:
+                name: {{ include "emqx.fullname" . }}-env 
           env:
           - name: EMQX_NAME
             value: emqx 
@@ -47,15 +50,15 @@ spec:
           - name: EMQX_CLUSTER__K8S__SERVICE_NAME
             value: {{ include "emqx.fullname" . }}
           - name: EMQX_CLUSTER__K8S__APISERVER
-            value: {{ .Values.deployment.env.kubeApiserver }} 
+            value: {{ .Values.apiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
             value: {{ .Values.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
-            value: {{ .Values.deployment.env.kubeAddressType }}
+            value: ip
           - name: EMQX_CLUSTER__K8S__APP_NAME
             value: emqx 
           tty: true
-          {{ if .Values.secret.apiserverToken  }}
+          {{ if .Values.apiserverToken  }}
           volumeMounts:
           - name: apiserver-token
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
