@@ -10,7 +10,6 @@ deployment:
   replicaCount: 2 
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
-  nodeExporter: false 
 
 emqxConfig:
   EMQX_LOADED_PLUGINS: "emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"

@@ -64,7 +64,3 @@ spec:
             mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
             readOnly: true
           {{ end }}
-        {{ if .Values.deployment.nodeExporter }}
-        - name: prometheus-node-exporter
-          image: "quay.io/prometheus/node-exporter:latest"
-        {{ end }}
