@@ -15,6 +15,9 @@ deployment:
     kubeAddressType: ip
   nodeExporter: true 
 
+emqxConfig:
+  EMQX_LOADED_PLUGINS: "emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"
+
 service:
   type: ClusterIP
   mqttPort: 1883

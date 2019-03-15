@@ -37,6 +37,9 @@ spec:
           - containerPort: 8083
           - containerPort: 8084
           - containerPort: 18083
+          envFrom:
+            - configMapRef:
+                name: {{ include "emqx.fullname" . }}-env 
           env:
           - name: EMQX_NAME
             value: emqx 
@@ -51,9 +54,7 @@ spec:
           - name: EMQX_CLUSTER__K8S__NAMESPACE
             value: {{ .Values.global.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
-            value: {{ .Values.deployment.env.kubeAddressType }}
-          - name: EMQX_CLUSTER__K8S__APP_NAME
-            value: emqx 
+            value: ip
           tty: true
           {{ if .Values.global.apiserverToken  }}
           volumeMounts:
