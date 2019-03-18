@@ -55,8 +55,6 @@ spec:
             value: {{ .Values.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: ip
-          - name: EMQX_CLUSTER__K8S__APP_NAME
-            value: emqx 
           tty: true
           {{ if .Values.apiserverToken  }}
           volumeMounts:

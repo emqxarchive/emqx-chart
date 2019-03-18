@@ -11,8 +11,8 @@ deployment:
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
 
-emqxConfig:
-  EMQX_LOADED_PLUGINS: "emqx_recon,emqx_retainer,emqx_management,emqx_dashboard"
+# Emqx configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
+emqxConfig: {}
 
 service:
   type: ClusterIP
