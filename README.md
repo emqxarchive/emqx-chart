@@ -29,7 +29,7 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `deployment.replicaCount` |  Default:2 |
 | `deployment.image` | Default:emqx/emqx:latest  |
 | `deployment.imagePullPolicy`  | Default:IfNotPresent  |
-| `deployment.nodeExporter` | True or false, Default: false |
+| `deployment.nodeSelector` | Assigning emqx pods to nodes |
 | `service.mqttPort`  | Emqx cluster MQTT port, Default:1883  |
 | `service.mqttsslPort` | Emqx cluster MQTT(SSL) port, Delfault:8883  |
 | `service.mgmtPort`  | Emqx cluster mgmt API, Default:8080  |

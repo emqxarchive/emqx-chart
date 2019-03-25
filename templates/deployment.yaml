@@ -20,6 +20,10 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      nodeSelector:
+      {{- range $index, $value := .Values.deployment.nodeSelector}}
+          {{$index}}: {{ $value }}
+      {{- end}}
       {{ if .Values.apiserverToken  }}
       volumes:
       - name: apiserver-token

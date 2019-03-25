@@ -10,6 +10,7 @@ deployment:
   replicaCount: 2 
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
+  nodeSelector: {}
 
 # Emqx configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
 emqxConfig: {}

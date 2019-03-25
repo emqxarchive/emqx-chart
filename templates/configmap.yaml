@@ -11,4 +11,4 @@ metadata:
 data:
   {{- range $index, $value := .Values.emqxConfig}}
       {{$index}}: {{ $value }}
-    {{- end}}
+  {{- end}}
