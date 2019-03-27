@@ -20,16 +20,11 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      serviceAccountName:  {{ include "emqx.fullname" . }}
       nodeSelector:
       {{- range $index, $value := .Values.deployment.nodeSelector}}
           {{$index}}: {{ $value }}
       {{- end}}
-      {{ if .Values.apiserverToken  }}
-      volumes:
-      - name: apiserver-token
-        secret:
-           secretName: apiserver-token
-      {{ end }}
       containers:
         - name: emqx
           image: {{ .Values.deployment.image}}
@@ -60,9 +55,3 @@ spec:
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: ip
           tty: true
-          {{ if .Values.apiserverToken  }}
-          volumeMounts:
-          - name: apiserver-token
-            mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
-            readOnly: true
-          {{ end }}

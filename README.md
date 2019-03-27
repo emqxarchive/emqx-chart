@@ -1,5 +1,5 @@
 # Introduction
-This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm package manager.
+This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm package manager. This is experimental. It should not be used in a production environment
 
 # Prerequisites
 + Kubernetes 1.6+
@@ -24,7 +24,6 @@ The following table lists the configurable parameters of the emqx chart and thei
 | Parameter  | Description |
 | ---        |  ---        |
 | `apiserver`  | **Required!** Kubernates API server address |
-| `apiserverToken` | Token used for authentication by kube apiserver |
 | `namespace`  | kubernetes namespace， Default:default |
 | `deployment.replicaCount` |  Default:2 |
 | `deployment.image` | Default:emqx/emqx:latest  |
