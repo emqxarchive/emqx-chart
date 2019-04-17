@@ -9,7 +9,7 @@ To install the chart with the release name `my-emqx`:
 ```
 $ git clone https://github.com/emqx/emqx-helm.git
 $ cd emqx-helm
-$ helm install --name my-emqx --set env.apiserver=http://xx.xx.xx.xx:port .
+$ helm install --name my-emqx --set apiserver=http://xx.xx.xx.xx:port .
 ```
 
 # Uninstalling the Chart
