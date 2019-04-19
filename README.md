@@ -7,9 +7,9 @@ This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm 
 # Installing the Chart
 To install the chart with the release name `my-emqx`:
 ```
-$ git clone https://github.com/emqx/emqx-helm.git
-$ cd emqx-helm
-$ helm install --name my-emqx --set apiserver=http://xx.xx.xx.xx:port .
+$ git clone https://github.com/emqx/emqx-chart.git
+$ cd emqx-chart
+$ helm install --name my-emqx .
 ```
 
 # Uninstalling the Chart
@@ -23,7 +23,7 @@ The following table lists the configurable parameters of the emqx chart and thei
 
 | Parameter  | Description |
 | ---        |  ---        |
-| `apiserver`  | **Required!** Kubernates API server address |
+| `apiserver`  | Kubernates API server address |
 | `namespace`  | kubernetes namespace， Default:default |
 | `deployment.replicaCount` |  Default:2 |
 | `deployment.image` | Default:emqx/emqx:latest  |

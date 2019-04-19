@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 namespace: default
-apiserver:  http://127.0.0.1:8080  
+apiserver: https://kubernetes.default.svc:443
 
 deployment:
   replicaCount: 2 
