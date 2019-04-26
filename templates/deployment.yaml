@@ -20,6 +20,12 @@ spec:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      {{ if .Values.emqxLicneseSecretName  }}
+      volumes:
+      - name: emqx-license
+        secret:
+          secretName: emqx-license
+      {{ end }}
       serviceAccountName:  {{ include "emqx.fullname" . }}
       nodeSelector:
       {{- range $index, $value := .Values.deployment.nodeSelector}}
@@ -55,3 +61,10 @@ spec:
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: ip
           tty: true
+          {{ if .Values.emqxLicneseSecretName  }}
+          volumeMounts:
+          - name: emqx-license
+            mountPath: "/opt/emqx/etc/emqx.lic"
+            subPath: "emqx.lic"
+            readOnly: true
+          {{ end }}
