@@ -29,7 +29,7 @@ spec:
       serviceAccountName:  {{ include "emqx.fullname" . }}
       nodeSelector:
       {{- range $index, $value := .Values.deployment.nodeSelector}}
-          {{$index}}: {{ $value }}
+          {{$index}}: "{{ $value }}"
       {{- end}}
       containers:
         - name: emqx
