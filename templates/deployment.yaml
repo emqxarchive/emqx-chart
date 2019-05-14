@@ -24,7 +24,7 @@ spec:
       volumes:
       - name: emqx-license
         secret:
-          secretName: emqx-license
+          secretName: {{ .Values.emqxLicneseSecretName }}
       {{ end }}
       serviceAccountName:  {{ include "emqx.fullname" . }}
       nodeSelector:
