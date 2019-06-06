@@ -6,7 +6,8 @@ namespace: default
 apiserver: https://kubernetes.default.svc:443
 
 deployment:
-  replicaCount: 2 
+  # It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split.
+  replicaCount: 3 
   image: emqx/emqx:latest
   imagePullPolicy: IfNotPresent
   nodeSelector: {}
