@@ -29,6 +29,10 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `deployment.image` | Default:emqx/emqx:latest  |
 | `deployment.imagePullPolicy`  | Default:IfNotPresent  |
 | `deployment.nodeSelector` | Assigning emqx pods to nodes |
+| `persistence.enabled` | Enable EMQX persistence using PVC |
+| `persistence.accessMode` | PVC Access Mode for EMQX volume |
+| `persistence.size` | PVC Storage Request for EMQX volume |
+| `resources` | CPU/Memory resource requests/limits |
 | `service.mqttPort`  | Emqx cluster MQTT port, Default:1883  |
 | `service.mqttsslPort` | Emqx cluster MQTT(SSL) port, Delfault:8883  |
 | `service.mgmtPort`  | Emqx cluster mgmt API, Default:8080  |
