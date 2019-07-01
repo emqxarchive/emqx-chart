@@ -19,9 +19,17 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+    serviceName: {{ include "emqx.fullname" . }}-headless
     spec:
-      {{ if .Values.emqxLicneseSecretName  }}
       volumes:
+      - name: emqx-data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "emqx.fullname" . }}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      {{ if .Values.emqxLicneseSecretName  }}
       - name: emqx-license
         secret:
           secretName: {{ .Values.emqxLicneseSecretName }}
@@ -60,9 +68,12 @@ spec:
             value: {{ .Values.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: ip
-          tty: true
-          {{ if .Values.emqxLicneseSecretName  }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
+          - name: emqx-data
+            mountPath: "/opt/emqx/data/mnesia"
+          {{ if .Values.emqxLicneseSecretName  }}
           - name: emqx-license
             mountPath: "/opt/emqx/etc/emqx.lic"
             subPath: "emqx.lic"

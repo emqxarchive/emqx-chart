@@ -12,6 +12,23 @@ deployment:
   imagePullPolicy: IfNotPresent
   nodeSelector: {}
 
+persistence:
+  enabled: false
+  ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
+  ## Default: volume.alpha.kubernetes.io/storage-class: default
+  ##
+  # storageClass
+  accessMode: ReadWriteOnce
+  size: 20Mi
+
+resources: {}
+  # limits:
+  #   cpu: 500m
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 500m
+  #   memory: 512Mi
+
 # EMQX configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
 emqxConfig: {}
 
@@ -19,7 +36,6 @@ emqxConfig: {}
 # Example:
 #   kubectl create secret generic emqx-license-secret-name --from-file=/path/to/emqx.lic
 emqxLicneseSecretName: 
-
 
 service:
   type: ClusterIP
