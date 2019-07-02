@@ -9,6 +9,8 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  updateStrategy:
+    type: RollingUpdate
   replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
