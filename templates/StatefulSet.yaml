@@ -81,3 +81,9 @@ spec:
             subPath: "emqx.lic"
             readOnly: true
           {{ end }}
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
