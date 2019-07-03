@@ -38,3 +38,47 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+
+------
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "emqx.fullname" . }}-headless
+  namespace: {{ .Values.namespace }}
+  labels:
+    app.kubernetes.io/name: {{ include "emqx.name" . }}
+    helm.sh/chart: {{ include "emqx.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  clusterIP: None
+  ports:
+  - name: mqtt
+    port: {{ .Values.service.mqttPort }}
+    protocol: TCP
+    targetPort: 1883
+  - name: mqttssl
+    port: {{ .Values.service.mqttsslPort }}
+    protocol: TCP
+    targetPort: 8883
+  - name: mgmt
+    port: {{ .Values.service.mgmtPort }}
+    protocol: TCP
+    targetPort: 8080
+  - name: websocket
+    port: {{ .Values.service.websocketPort }}
+    protocol: TCP
+    targetPort: 8083
+  - name: wss
+    port: {{ .Values.service.wssPort }}
+    protocol: TCP
+    targetPort: 8084
+  - name: dashboard
+    port: {{ .Values.service.dashboardPort }}
+    protocol: TCP
+    targetPort: 18083
+  selector:
+    app.kubernetes.io/name: {{ include "emqx.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

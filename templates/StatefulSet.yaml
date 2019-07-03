@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  serviceName: {{ include "emqx.fullname" . }}-headless
   updateStrategy:
     type: RollingUpdate
   replicas: {{ .Values.deployment.replicaCount }}
@@ -21,7 +22,6 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "emqx.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-    serviceName: {{ include "emqx.fullname" . }}-headless
     spec:
       volumes:
       - name: emqx-data
