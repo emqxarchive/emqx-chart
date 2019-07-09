@@ -25,7 +25,7 @@ The following table lists the configurable parameters of the emqx chart and thei
 | ---        |  ---        |
 | `apiserver`  | Kubernates API server address |
 | `namespace`  | kubernetes namespace， Default:default |
-| `deployment.replicaCount` |  Default:3. It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split.|
+| `deployment.replicas` |  Default:3. It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split.|
 | `deployment.image` | Default:emqx/emqx:latest  |
 | `deployment.imagePullPolicy`  | Default:IfNotPresent  |
 | `deployment.nodeSelector` | Assigning emqx pods to nodes |

@@ -35,7 +35,7 @@ spec:
   {{- end }}
   updateStrategy:
     type: RollingUpdate
-  replicas: {{ .Values.deployment.replicaCount }}
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "emqx.name" . }}
