@@ -39,7 +39,7 @@ spec:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 
-------
+---
 apiVersion: v1
 kind: Service
 metadata:

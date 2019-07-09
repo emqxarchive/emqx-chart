@@ -14,12 +14,15 @@ deployment:
 
 persistence:
   enabled: false
+  size: 20Mi
   ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
   ## Default: volume.alpha.kubernetes.io/storage-class: default
-  ##
-  # storageClass
+  # storageClass: "-"
   accessMode: ReadWriteOnce
-  size: 20Mi
+  ## Existing PersistentVolumeClaims
+  ## The value is evaluated as a template
+  ## So, for example, the name can depend on .Release or .Chart
+  # existingClaim: ""
 
 resources: {}
   # limits:

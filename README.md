@@ -30,6 +30,8 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `deployment.imagePullPolicy`  | Default:IfNotPresent  |
 | `deployment.nodeSelector` | Assigning emqx pods to nodes |
 | `persistence.enabled` | Enable EMQX persistence using PVC |
+| `persistence.storageClass` | Storage class of backing PVC |
+| `persistence.existingClaim` | EMQ X data Persistent Volume existing claim name, evaluated as a template |
 | `persistence.accessMode` | PVC Access Mode for EMQX volume |
 | `persistence.size` | PVC Storage Request for EMQX volume |
 | `resources` | CPU/Memory resource requests/limits |
