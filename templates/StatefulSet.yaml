@@ -57,11 +57,11 @@ spec:
           claimName: {{ tpl . $ }}
         {{- end }}
       {{- end }}
-      {{ if .Values.emqxLicneseSecretName  }}
+      {{- if .Values.emqxLicneseSecretName  }}
       - name: emqx-license
         secret:
           secretName: {{ .Values.emqxLicneseSecretName }}
-      {{ end }}
+      {{- end }}
       serviceAccountName:  {{ include "emqx.fullname" . }}
       nodeSelector:
       {{- range $index, $value := .Values.deployment.nodeSelector}}
@@ -89,13 +89,20 @@ spec:
           - name: EMQX_CLUSTER__DISCOVERY
             value: k8s 
           - name: EMQX_CLUSTER__K8S__SERVICE_NAME
-            value: {{ include "emqx.fullname" . }}
+            value: {{ include "emqx.fullname" . }}-headless
           - name: EMQX_CLUSTER__K8S__APISERVER
             value: {{ .Values.apiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
             value: {{ .Values.namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
-            value: ip
+            value: {{ .Values.emqxAddressType }}
+          {{- if eq  .Values.emqxAddressType "hostname" }}
+          - name: EMQX_CLUSTER__K8S__SUFFIX
+            value: svc.cluster.local
+          {{- else if eq .Values.emqxAddressType "dns" }}
+          - name: EMQX_CLUSTER__K8S__SUFFIX
+            value: pod.cluster.local
+          {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
