@@ -32,6 +32,12 @@ resources: {}
   #   cpu: 500m
   #   memory: 512Mi
 
+## The address type is used to extract host from k8s service.
+##
+## Value: ip | dns | hostname
+## Note：Hostname is only supported after v3.2.1
+emqxAddressType: hostname 
+
 # EMQX configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
 emqxConfig: {}
 
