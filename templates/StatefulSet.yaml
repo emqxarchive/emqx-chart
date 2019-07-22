@@ -67,6 +67,8 @@ spec:
       {{- range $index, $value := .Values.deployment.nodeSelector}}
           {{$index}}: "{{ $value }}"
       {{- end}}
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: emqx
           image: {{ .Values.deployment.image}}
