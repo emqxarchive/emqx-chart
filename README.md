@@ -1,16 +1,24 @@
 # Introduction
-This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm package manager. This is experimental. It should not be used in a production environment
+This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm package manager. 
 
 # Prerequisites
 + Kubernetes 1.6+
 
 # Installing the Chart
 To install the chart with the release name `my-emqx`:
-```
-$ git clone https://github.com/emqx/emqx-chart.git
-$ cd emqx-chart/charts/emqx
-$ helm install --name my-emqx .
-```
+
++   From github 
+    ```
+    $ git clone https://github.com/emqx/emqx-chart.git
+    $ cd emqx-chart/charts/emqx
+    $ helm install --name my-emqx .
+    ```
+
++   From chart repos
+    ```
+    helm repo add emqx https://repos.emqx.io/charts
+    helm install --name my-emqx emqx/emqx
+    ```
 
 # Uninstalling the Chart
 To uninstall/delete the `my-emqx` deployment:
