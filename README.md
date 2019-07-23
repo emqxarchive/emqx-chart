@@ -8,7 +8,7 @@ This chart bootstraps an emqx deployment on a Kubernetes cluster using the Helm 
 To install the chart with the release name `my-emqx`:
 ```
 $ git clone https://github.com/emqx/emqx-chart.git
-$ cd emqx-chart
+$ cd emqx-chart/charts/emqx
 $ helm install --name my-emqx .
 ```
 
