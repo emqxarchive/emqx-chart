@@ -35,7 +35,7 @@ spec:
   {{- end }}
   updateStrategy:
     type: RollingUpdate
-  replicas: {{ .Values.deployment.replicas }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "emqx.name" . }}
@@ -63,16 +63,12 @@ spec:
           secretName: {{ .Values.emqxLicneseSecretName }}
       {{- end }}
       serviceAccountName:  {{ include "emqx.fullname" . }}
-      nodeSelector:
-      {{- range $index, $value := .Values.deployment.nodeSelector}}
-          {{$index}}: "{{ $value }}"
-      {{- end}}
       securityContext:
         fsGroup: 1000
       containers:
         - name: emqx
-          image: {{ .Values.deployment.image}}
-          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
+          image: {{ .Values.image}}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
           - containerPort: 1883
           - containerPort: 8883

@@ -5,12 +5,11 @@
 namespace: default
 apiserver: https://kubernetes.default.svc:443
 
-deployment:
-  # It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split.
-  replicas: 3 
-  image: emqx/emqx:latest
-  imagePullPolicy: IfNotPresent
-  nodeSelector: {}
+# It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split.
+replicas: 3 
+image: emqx/emqx:latest
+imagePullPolicy: IfNotPresent
+nodeSelector: {}
 
 persistence:
   enabled: false
@@ -36,7 +35,7 @@ resources: {}
 ##
 ## Value: ip | dns | hostname
 ## Note：Hostname is only supported after v3.2.1
-emqxAddressType: hostname 
+emqxAddressType: ip 
 
 # EMQX configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
 emqxConfig: {}

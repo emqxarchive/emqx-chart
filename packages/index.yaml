@@ -2,12 +2,12 @@ apiVersion: v1
 entries:
   emqx:
   - apiVersion: v1
-    appVersion: v1.0.0
-    created: 2019-07-23T10:24:35.855155+08:00
+    appVersion: v1.0.0-beta.1
+    created: 2019-07-24T14:37:11.591633+08:00
     description: A Helm chart for Emqx
-    digest: 18d6f6eec9ec3304d332fc591a0f6a2c0d960928627caad3b151b3f1a1bf5f2f
+    digest: 075c858ea15f8297d39cfe61964498eae873d894e5dae5265ec72c0568129eae
     name: emqx
     urls:
-    - emqx-v1.0.0.tgz
-    version: v1.0.0
-generated: 2019-07-23T10:24:35.84838+08:00
+    - emqx-v1.0.0-beta.1.tgz
+    version: v1.0.0-beta.1
+generated: 2019-07-24T14:37:11.582377+08:00
