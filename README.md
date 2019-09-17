@@ -17,8 +17,9 @@ To install the chart with the release name `my-emqx`:
 +   From chart repos
     ```
     helm repo add emqx https://repos.emqx.io/charts
-    helm install --name my-emqx emqx/emqx
+    helm install --devel --name my-emqx emqx/emqx
     ```
+    > EMQ X Chart is currently in Beta, so you need to add `--devel` when you execute the `helm install` command. 
 
 # Uninstalling the Chart
 To uninstall/delete the `my-emqx` deployment:
