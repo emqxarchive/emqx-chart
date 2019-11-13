@@ -33,7 +33,6 @@ The following table lists the configurable parameters of the emqx chart and thei
 | Parameter  | Description | Default Value |
 | ---        |  ---        | ---           |
 | `apiserver`  | Kubernates API server address |  https://kubernetes.default.svc:443    |
-| `namespace`  | kubernetes namespace   |   default |
 | `replicas` | It is recommended to have odd number of nodes in a cluster, otherwise the emqx cluster cannot be automatically healed in case of net-split. |3|
 | `image` | EMQ X Image name |emqx/emqx:latest|
 | `imagePullPolicy`  | Global Docker registry secret names as an array |IfNotPresent|

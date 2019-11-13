@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "emqx.fullname" . }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     helm.sh/chart: {{ include "emqx.chart" . }}
@@ -14,7 +14,7 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: emqx-data
-        namespace: {{ .Values.namespace }}
+        namespace: {{ .Release.Namespace }}
         labels:
           app.kubernetes.io/name: {{ include "emqx.name" . }}
           helm.sh/chart: {{ include "emqx.chart" . }}
@@ -91,7 +91,7 @@ spec:
           - name: EMQX_CLUSTER__K8S__APISERVER
             value: {{ .Values.apiserver }} 
           - name: EMQX_CLUSTER__K8S__NAMESPACE
-            value: {{ .Values.namespace }}
+            value: {{ .Release.Namespace }}
           - name: EMQX_CLUSTER__K8S__ADDRESS_TYPE
             value: {{ .Values.emqxAddressType }}
           {{- if eq  .Values.emqxAddressType "hostname" }}
