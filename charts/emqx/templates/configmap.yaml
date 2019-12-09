@@ -9,6 +9,4 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
-  {{- range $index, $value := .Values.emqxConfig}}
-    {{$index}}: "{{ $value }}" 
-  {{- end}}
+  {{- toYaml .Values.emqxConfig | nindent 2 }}

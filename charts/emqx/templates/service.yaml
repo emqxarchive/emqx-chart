@@ -12,29 +12,29 @@ spec:
   type: {{ .Values.service.type }} 
   ports:
   - name: mqtt
-    port: {{ .Values.service.mqttPort }} 
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__TCP__EXTERNAL | default 1883 }}
     protocol: TCP
-    targetPort: 1883
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__TCP__EXTERNAL | default 1883 }}
   - name: mqttssl
-    port: {{ .Values.service.mqttsslPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__SSL__EXTERNAL | default 8883 }}
     protocol: TCP
-    targetPort: 8883
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__SSL__EXTERNAL | default 8883 }}
   - name: mgmt
-    port: {{ .Values.service.mgmtPort }}
+    port: {{ .Values.emqxConfig.EMQX_MANAGEMENT__LISTENER__HTTP | default 8080 }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.emqxConfig.EMQX_MANAGEMENT__LISTENER__HTTP | default 8080 }}
   - name: websocket
-    port: {{ .Values.service.websocketPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__WS__EXTERNAL | default 8083 }}
     protocol: TCP
-    targetPort: 8083
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__WS__EXTERNAL | default 8083 }}
   - name: wss
-    port: {{ .Values.service.wssPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__WSS__EXTERNAL | default 8084 }}
     protocol: TCP
-    targetPort: 8084
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__WSS__EXTERNAL | default 8084 }}
   - name: dashboard
-    port: {{ .Values.service.dashboardPort }}
+    port: {{ .Values.emqxConfig.EMQX_DASHBOARD__LISTENER__HTTP | default 18083 }}
     protocol: TCP
-    targetPort: 18083
+    targetPort: {{ .Values.emqxConfig.EMQX_DASHBOARD__LISTENER__HTTP | default 18083 }}
   selector:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
@@ -56,29 +56,29 @@ spec:
   clusterIP: None
   ports:
   - name: mqtt
-    port: {{ .Values.service.mqttPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__TCP__EXTERNAL | default 1883 }}
     protocol: TCP
-    targetPort: 1883
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__TCP__EXTERNAL | default 1883 }}
   - name: mqttssl
-    port: {{ .Values.service.mqttsslPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__SSL__EXTERNAL | default 8883 }}
     protocol: TCP
-    targetPort: 8883
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__SSL__EXTERNAL | default 8883 }}
   - name: mgmt
-    port: {{ .Values.service.mgmtPort }}
+    port: {{ .Values.emqxConfig.EMQX_MANAGEMENT__LISTENER__HTTP | default 8080 }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.emqxConfig.EMQX_MANAGEMENT__LISTENER__HTTP | default 8080 }}
   - name: websocket
-    port: {{ .Values.service.websocketPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__WS__EXTERNAL | default 8083 }}
     protocol: TCP
-    targetPort: 8083
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__WS__EXTERNAL | default 8083 }}
   - name: wss
-    port: {{ .Values.service.wssPort }}
+    port: {{ .Values.emqxConfig.EMQX_LISTENER__WSS__EXTERNAL | default 8084 }}
     protocol: TCP
-    targetPort: 8084
+    targetPort: {{ .Values.emqxConfig.EMQX_LISTENER__WSS__EXTERNAL | default 8084 }}
   - name: dashboard
-    port: {{ .Values.service.dashboardPort }}
+    port: {{ .Values.emqxConfig.EMQX_DASHBOARD__LISTENER__HTTP | default 18083 }}
     protocol: TCP
-    targetPort: 18083
+    targetPort: {{ .Values.emqxConfig.EMQX_DASHBOARD__LISTENER__HTTP | default 18083 }}
   selector:
     app.kubernetes.io/name: {{ include "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

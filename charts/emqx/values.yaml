@@ -38,7 +38,9 @@ resources: {}
 emqxAddressType: ip 
 
 # EMQX configuration item, see the documentation (https://github.com/emqx/emqx-docker#emq-x-configuration)
-emqxConfig: {}
+emqxConfig:
+  ## The default HTTP API port for releases after 4.0-rc.1 is changed from 8080 to 8081, specifying port 8080 here for compatibility with new and old versions
+  EMQX_MANAGEMENT__LISTENER__HTTP: "8080"
 
 # EMQX Enterprise Edition requires manual creation of a Secret containing the licensed content. Write the name of Secret to the value of "emqxLicneseSecretName"
 # Example:
@@ -47,12 +49,6 @@ emqxLicneseSecretName:
 
 service:
   type: ClusterIP
-  mqttPort: 1883
-  mqttsslPort: 8883
-  mgmtPort: 8080
-  websocketPort: 8083
-  wssPort: 8084
-  dashboardPort: 18083
 
 ingress:
   enabled: false
