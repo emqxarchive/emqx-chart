@@ -3,16 +3,16 @@ entries:
   emqx:
   - apiVersion: v1
     appVersion: v1.0.0-rc.1
-    created: "2019-12-09T02:43:02.361108602Z"
+    created: "2019-12-09T09:46:18.701202298Z"
     description: A Helm chart for EMQ X
-    digest: 1a30badd5f84cc763776e2ebf917adcd6ac1b05a3b5cf975dd8e62f8e97d9550
+    digest: ed3334301cef110d2f6f1046a1db0b3933512b9f1f60e30f505fde8aad1f4bfd
     name: emqx
     urls:
     - emqx-v1.0.0-rc.1.tgz
     version: v1.0.0-rc.1
   - apiVersion: v1
     appVersion: v1.0.0-beta.3
-    created: "2019-12-09T02:43:02.360637568Z"
+    created: "2019-12-09T09:46:18.700703721Z"
     description: A Helm chart for EMQ X
     digest: dfad68751e16c957ce92ddbfc05d80425cc849fa4c0038c4b3c7142d1f619941
     name: emqx
@@ -21,7 +21,7 @@ entries:
     version: v1.0.0-beta.3
   - apiVersion: v1
     appVersion: v1.0.0-beta.2
-    created: "2019-12-09T02:43:02.359673806Z"
+    created: "2019-12-09T09:46:18.70021449Z"
     description: A Helm chart for EMQ X
     digest: f3924052f22c1349ae61ef5a2c3a284830d1dab84e2b4c91db3a18623457888f
     name: emqx
@@ -30,11 +30,11 @@ entries:
     version: v1.0.0-beta.2
   - apiVersion: v1
     appVersion: v1.0.0-beta.1
-    created: "2019-12-09T02:43:02.358732547Z"
+    created: "2019-12-09T09:46:18.699761695Z"
     description: A Helm chart for Emqx
     digest: 075c858ea15f8297d39cfe61964498eae873d894e5dae5265ec72c0568129eae
     name: emqx
     urls:
     - emqx-v1.0.0-beta.1.tgz
     version: v1.0.0-beta.1
-generated: "2019-12-09T02:43:02.357657929Z"
+generated: "2019-12-09T09:46:18.699126312Z"
