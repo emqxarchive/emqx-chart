@@ -42,6 +42,9 @@ The following table lists the configurable parameters of the emqx chart and thei
 | `persistence.accessMode` | PVC Access Mode for EMQX volume |ReadWriteOnce|
 | `persistence.size` | PVC Storage Request for EMQX volume |20Mi|
 | `resources` | CPU/Memory resource requests/limits |{}|
+| `nodeSelector` | Node labels for pod assignment |`{}`|
+| `tolerations` | Toleration labels for pod assignment |`[]`|
+| `affinity` | Map of node/pod affinities |`{}`|
 | `service.type`  | Emqx cluster service type. |ClusterIP|
 | `emqxAddressType` | The address type is used to extract host from k8s service. <br> Value: ip/dns/hostname  <br> Note: hostname is only supported after v3.2.1 | ip |
 | `emqxConfig` | Emqx configuration item, see the [documentation](https://github.com/emqx/emqx-docker#emq-x-configuration) |{}|

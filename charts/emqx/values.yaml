@@ -45,11 +45,18 @@ emqxConfig:
 # EMQX Enterprise Edition requires manual creation of a Secret containing the licensed content. Write the name of Secret to the value of "emqxLicneseSecretName"
 # Example:
 #   kubectl create secret generic emqx-license-secret-name --from-file=/path/to/emqx.lic
-emqxLicneseSecretName: 
+emqxLicneseSecretName:
 
 service:
   type: ClusterIP
 
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## TODO:
 ingress:
   enabled: false
   annotations: {}
